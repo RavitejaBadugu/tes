@@ -6,8 +6,9 @@ from preprocessing import *
 import requests
 import json
 
-roberta_tokenizer=tokenizers.ByteLevelBPETokenizer('./roberta-base-vocab.json','./roberta-base-merges.txt',
+roberta_tokenizer=tokenizers.ByteLevelBPETokenizer('./tokenizer/vocab-roberta-base.json','./tokenizer/merges-roberta-base.txt',
                                                   lowercase=True)
+
 
 def get_sentiment_predict(text):
     model_inputs=get_roberta_data(text,roberta_tokenizer,sentiment=None,max_len=MAX_LENGTH)
@@ -15,15 +16,24 @@ def get_sentiment_predict(text):
      "instances": [model_inputs]})
     headers={"content-type": "application/json"}
     p0=requests.post(senti_url['fold_0'],data=data,headers=headers)
-    pred_0=json.loads(p0['predictions'].text())
+    print(
+        'MODEL IS INVOKED'
+    )
+    print(json.loads(p0.text))
+    print(json.loads(p0.text))
+    print(json.loads(p0.text))
+    print(json.loads(p0.text))
+    print(json.loads(p0.text))
+    print(json.loads(p0.text))
+    pred_0=json.loads(p0.text)['predictions']
     p1=requests.post(senti_url['fold_1'],data=data,headers=headers)
-    pred_1=json.loads(p1['predictions'].text())
+    pred_1=json.loads(p1.text)['predictions']
     p2=requests.post(senti_url['fold_2'],data=data,headers=headers)
-    pred_2=json.loads(p2['predictions'].text())
+    pred_2=json.loads(p2.text)['predictions']
     p3=requests.post(senti_url['fold_3'],data=data,headers=headers)
-    pred_3=json.loads(p3['predictions'].text())
+    pred_3=json.loads(p3.text)['predictions']
     p4=requests.post(senti_url['fold_4'],data=data,headers=headers)
-    pred_4=json.loads(p4['predictions'].text())
+    pred_4=json.loads(p4.text)['predictions']
     prediction=(pred_0+pred_1+pred_2+pred_3+pred_4)/5.0
     return np.argmax(prediction,axis=-1)[0]
     
@@ -37,15 +47,21 @@ def get_extracted_text(text,sentiment):
         "instances": [model_inputs]})
         headers={"content-type": "application/json"}
         p0=requests.post(extract_url['fold_0'],data=data,headers=headers)
-        pred_0=json.loads(p0['predictions'].text())
+        pred_0=json.loads(p0.text)['predictions']
         p1=requests.post(extract_url['fold_1'],data=data,headers=headers)
-        pred_1=json.loads(p1['predictions'].text())
+        pred_1=json.loads(p1.text)['predictions']
         p2=requests.post(extract_url['fold_2'],data=data,headers=headers)
-        pred_2=json.loads(p2['predictions'].text())
+        pred_2=json.loads(p2.text)['predictions']
         p3=requests.post(extract_url['fold_3'],data=data,headers=headers)
-        pred_3=json.loads(p3['predictions'].text())
+        pred_3=json.loads(p3.text)['predictions']
         p4=requests.post(extract_url['fold_4'],data=data,headers=headers)
-        pred_4=json.loads(p4['predictions'].text())
+        pred_4=json.loads(p4.text)['predictions']
+        #if isinstance(pred_0,list):
+        #    pred_0=np.asarray(pred_0)
+        #    pred_1=np.asarray(pred_1)
+        #    pred_2=np.asarray(pred_2)
+        #    pred_3=np.asarray(pred_3)
+        #    pred_4=np.asarray(pred_4)
         start_id,end_id=get_prediction_ids(pred_0+pred_1+pred_2+pred_3+pred_4)
         if start_id>end_id:
             prediction=text

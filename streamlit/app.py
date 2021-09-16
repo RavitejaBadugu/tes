@@ -11,8 +11,8 @@ if tweet:
     with st.spinner('prediction is in progress'):
         tweet_data={'tweet':tweet}
         extraction_data={'tweet':tweet,'sentiment':0}
-        response=requests.post('http://localhost:8000/sentiment',json=tweet_data).json()
+        response=requests.post('http://fastapi:8000/sentiment',json=tweet_data).json()
         extraction_data['sentiment']=sentiment_maps.get(response['sentiment'])
-        extracted_pred=requests.post('http://localhost:8000/extraction',json=extraction_data).json()
+        extracted_pred=requests.post('http://fastapi:8000/extraction',json=extraction_data).json()
         st.success(extracted_pred['extracted_text'])
     

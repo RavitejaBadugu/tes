@@ -14,14 +14,14 @@ def get_roberta_data(text,tokenizer,sentiment,max_len=512):
     token_ids=tokenizer.encode(text).ids
     offsets=tokenizer.encode(text).offsets
     if len(token_ids)>(max_len-5):
-        if senti_id is not None:
+        if sentiment is not None:
             token_ids=[0]+token_ids[:(max_len-5)]+[2]+[2]+senti_id+[2]
             offsets=[(-1,-1)]+offsets[:(max_len-5)]+[(-1,-1)]+[(-1,-1)]+senti_offset+[(-1,-1)]
         else:
             token_ids=[0]+token_ids[:(max_len-2)]+[2]
             offsets=[(-1,-1)]+offsets[:(max_len-2)]+[(-1,-1)]
     else:
-        if senti_id is not None:
+        if sentiment is not None:
             pad_len=max_len-len(token_ids)-5
             token_ids=[0]+token_ids+[2]+[2]+senti_id+[2]+[1]*pad_len
             offsets=[(-1,-1)]+offsets+[(-1,-1)]+[(-1,-1)]+senti_offset+[(-1,-1)]+[(-1,-1)]*pad_len
@@ -30,7 +30,7 @@ def get_roberta_data(text,tokenizer,sentiment,max_len=512):
             token_ids=[0]+token_ids+[2]+[1]*pad_len
             offsets=[(-1,-1)]+offsets+[(-1,-1)]+[(-1,-1)]*pad_len
     attention_mask=np.not_equal(1,token_ids).astype('int')
-    return {'input_ids':token_ids,'attention_mask':attention_mask}
+    return {'input_ids':token_ids,'attention_mask':attention_mask.tolist()}
 
 def get_prediction_ids(p1,p2,p3,p4,p5):
     start_ids=(p1['start_ids']+p2['start_ids']+p3['start_ids']+p4['start_ids']+p5['start_ids'])/5.0

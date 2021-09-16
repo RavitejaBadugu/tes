@@ -10,6 +10,4 @@ RUN pip install -r streamlit_requriements.txt
 
 COPY . /streamlit
 
-EXPOSE 8501
-
 CMD streamlit run app.py
