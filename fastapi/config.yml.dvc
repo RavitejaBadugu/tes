@@ -1,0 +1,5 @@
+outs:
+- md5: fc223b198fb6ce3f47e669d737d61a3a
+  size: 215
+  path: config.yml
+  isexec: true

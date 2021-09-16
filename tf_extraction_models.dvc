@@ -1,0 +1,5 @@
+outs:
+- md5: 06e3e9cd4bede2832257a43388ef7ff7.dir
+  size: 2564886247
+  nfiles: 17
+  path: tf_extraction_models

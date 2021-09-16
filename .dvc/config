@@ -1,0 +1,4 @@
+[core]
+    remote = tweet_remote
+['remote "tweet_remote"']
+    url = gdrive://192Ji_FqKXLz23wlI4mZWhEMA2mUpxsh4

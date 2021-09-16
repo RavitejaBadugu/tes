@@ -1,0 +1,9 @@
+numpy==1.21.2
+tensorflow==2.4.1
+transformers==4.6.1
+tokenizers==0.10.3
+fastapi==0.68.1
+pydantic==1.8.2
+uvicorn==0.15.0
+requests==2.26.0
+PyYAML==5.4.1

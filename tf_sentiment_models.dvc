@@ -1,0 +1,5 @@
+outs:
+- md5: ef3d28fb4355cde39563979386df2925.dir
+  size: 2564382786
+  nfiles: 17
+  path: tf_sentiment_models
