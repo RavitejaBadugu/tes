@@ -41,8 +41,8 @@ Docker command for running tf serving in ec2 and follow the same for sentiment m
 Output from the app given a sentence::
 ![alt text](https://github.com/RavitejaBadugu/tweet_sentiment_extraction/blob/main/tweet_images/positive_test_sample.png)
 
-From above text input if we change "good to negative and add no in front of river" models going to predict given is creating negative impact and gives Negative part of sentence as output.
-![alt text](https://github.com/RavitejaBadugu/tweet_sentiment_extraction/blob/main/tweet_images/positive_test_sample.png)
+From above text input if we change "good to negative and add no in front of river" models going to predict that given text is creating negative impact and gives Negative part of sentence as output.
+![alt text](https://github.com/RavitejaBadugu/tweet_sentiment_extraction/blob/main/tweet_images/negative_test_sample.png)
 
 
 
