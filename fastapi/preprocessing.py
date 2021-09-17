@@ -33,11 +33,16 @@ def get_roberta_data(text,tokenizer,sentiment,max_len=512):
     return {'input_ids':token_ids,'attention_mask':attention_mask.tolist()}
 
 def get_prediction_ids(p1,p2,p3,p4,p5):
-    start_ids=(p1['start_ids']+p2['start_ids']+p3['start_ids']+p4['start_ids']+p5['start_ids'])/5.0
-    end_ids=(p1['end_ids']+p2['end_ids']+p3['end_ids']+p4['end_ids']+p5['end_ids'])/5.0
-    start_id=np.argmax(start_ids,axis=-1)[0]
-    end_id=np.argmax(end_ids,axis=-1)[0]
-    return start_id,end_id
+    p1=p1[0]
+    p2=p2[0]
+    p3=p3[0]
+    p4=p4[0]
+    p5=p5[0]
+    start_ids=(np.asarray(p1['start_ids'])+np.asarray(p2['start_ids'])+np.asarray(p3['start_ids'])+np.asarray(p4['start_ids'])+np.asarray(p5['start_ids']))/5.0
+    end_ids=(np.asarray(p1['end_ids'])+np.asarray(p2['end_ids'])+np.asarray(p3['end_ids'])+np.asarray(p4['end_ids'])+np.asarray(p5['end_ids']))/5.0
+    start_id=np.argmax(start_ids,axis=-1)
+    end_id=np.argmax(end_ids,axis=-1)
+    return int(start_id),int(end_id)
 
 def get_prediction_roberta_string(prediction_ids,tokenizer):
     prediction_tokens=tokenizer.decode(prediction_ids)

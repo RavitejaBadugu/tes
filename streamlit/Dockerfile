@@ -10,4 +10,6 @@ RUN pip install -r streamlit_requriements.txt
 
 COPY . /streamlit
 
-CMD streamlit run app.py
+EXPOSE 8502
+
+CMD streamlit run app.py --server.port 8502

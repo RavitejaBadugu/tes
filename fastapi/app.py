@@ -12,13 +12,13 @@ class Extraction_data(BaseModel):
     sentiment: str
 
 @app.post('/sentiment')
-def get_sentiment(sentence: Input_tweet):
+async def get_sentiment(sentence: Input_tweet):
     data=sentence.dict()
     sentiment_predicted=get_sentiment_predict(data['tweet'])
     return {'sentiment':sentiment_predicted}
 
 @app.post('/extraction')
-def get_extraction(input_data: Extraction_data):
+async def get_extraction(input_data: Extraction_data):
     data=input_data.dict()
     extracted_text=get_extracted_text(data['tweet'],data['sentiment'])
     return {'extracted_text': extracted_text}

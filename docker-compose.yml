@@ -10,7 +10,7 @@ services:
   streamlit:
     build: streamlit/
     ports:
-      - '8502:8501'
+      - '8502:8502'
     container_name: streamlit
     networks: 
       - tweet_network

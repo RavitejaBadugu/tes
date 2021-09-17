@@ -14,5 +14,6 @@ if tweet:
         response=requests.post('http://fastapi:8000/sentiment',json=tweet_data).json()
         extraction_data['sentiment']=sentiment_maps.get(response['sentiment'])
         extracted_pred=requests.post('http://fastapi:8000/extraction',json=extraction_data).json()
-        st.success(extracted_pred['extracted_text'])
+        st.success(f"the sentiment given text lead is {extraction_data['sentiment']}")
+        st.success(f"part of text responsible for that sentiment is {extracted_pred['extracted_text']}")
     
